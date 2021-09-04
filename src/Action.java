@@ -1,5 +1,7 @@
 import enums.ActionType;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public class Action {
@@ -8,20 +10,24 @@ public class Action {
     private List<Product> actionSecond;
     private List<Product> actionSeason;
     private List<Product> actionNone;
+    private List<Product> productListWithAction;
     private Thread thSort;
     private Thread thEveryThree;
     private Thread thSecond;
     private Thread thSeason;
     private Thread thFinal;
 
-    public Action(/*List<Product> productList*/) {
+    public Action(/*List<Product> productList*/ int discount) {
         thSort = new Thread(() -> sortByAction());
         thSort.run();
-        thEveryThree = new Thread(() -> everyThree());
+        thEveryThree = new Thread(() -> actionEveryThree());
         thEveryThree.start();
-        thSecond = new Thread(() -> forSecondProduct());
+        thSecond = new Thread(() -> actionForSecondProduct());
         thSecond.start();
-        finalMethod();
+        thSeason = new Thread(() -> actionSeason(discount));
+        thSeason.start();
+        thFinal = new Thread(() -> union());
+        thFinal.start();
     }
 
     public void sortByAction() {
@@ -37,41 +43,44 @@ public class Action {
         }
     }
 
-    public void everyThree() {
-        System.out.println(thSort.isAlive());
-        if (thSort.isAlive()) {
-            try {
-                thEveryThree.wait();
-                thSort.isAlive();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-//        if (productList == null)
-//            return;
-//        for (Product list : productList) {
-//
-//        }
-    }
-
-    public void forSecondProduct() {
-        if (productList == null)
+    public void actionEveryThree() {
+        if (actionThree == null)
             return;
-        for (Product list : productList) {
-
+        for (int i = 2; i < actionThree.size(); ) {
+            this.actionThree.get(i).setPrice(BigDecimal.valueOf(1, 2));
+            i += 3;
         }
     }
 
-    public void seasonAction() {
-
+    public void actionForSecondProduct() {
+        if (actionSecond == null)
+            return;
+        actionSecond.sort((x, y) -> {
+            if (x.getPrice().doubleValue() < y.getPrice().doubleValue()) return 1;
+            if (x.getPrice().doubleValue() > y.getPrice().doubleValue()) return -1;
+            if (x.getPrice().doubleValue() == y.getPrice().doubleValue()) return 0;
+            return 0;
+        });
+        int secondProd = actionSecond.size() / 2;
+        for (int i = 1; i < actionSecond.size(); ) {
+            //  this.actionSecond.get(i).setPrice();
+        }
     }
 
-    public void finalMethod() {
+    public void actionSeason(int discount) {
+        if (actionSeason == null)
+            return;
+        int disc = 100 - discount;
+        for (Product list : actionSeason)
+            list.setPrice(list.getPrice().multiply(new BigDecimal(BigInteger.valueOf(disc), 2)));
+    }
+
+    public void union() {
         try {
             thEveryThree.join();
             thSecond.join();
-            System.out.println(thEveryThree.isAlive());
-            System.out.println(thSecond.isAlive());
+            thSeason.join();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
