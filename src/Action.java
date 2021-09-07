@@ -52,18 +52,42 @@ public class Action {
         }
     }
 
+    private int count = 0;
+    private boolean secondProd = false;
+
     public void actionForSecondProduct() {
         if (actionSecond == null)
             return;
+        Thread th = new Thread(() -> check(actionSecond.size()));
+        th.start();
         actionSecond.sort((x, y) -> {
             if (x.getPrice().doubleValue() < y.getPrice().doubleValue()) return 1;
             if (x.getPrice().doubleValue() > y.getPrice().doubleValue()) return -1;
             if (x.getPrice().doubleValue() == y.getPrice().doubleValue()) return 0;
             return 0;
         });
-        int secondProd = actionSecond.size() / 2;
-        for (int i = 1; i < actionSecond.size(); ) {
-            //  this.actionSecond.get(i).setPrice();
+        try {
+            th.join();
+            for (int i = 0; i < count; i++)
+                actionSecond.get(i).setPrice(BigDecimal.valueOf(1, 2));
+            if (secondProd)
+                actionSecond.get(count + 1).setPrice(actionSecond.get(count + 1)
+                        .getPrice().multiply(BigDecimal.valueOf(0.5)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void check(int length) {
+        if (length == 1)
+            return;
+        else if (length == 2) {
+            secondProd = true;
+            return;
+        } else if (length >= 3) {
+            count++;
+            check(length - 3);
         }
     }
 
