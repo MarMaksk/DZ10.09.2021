@@ -1,4 +1,6 @@
-package Task;
+package Task.PreparationService;
+
+import Task.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;
