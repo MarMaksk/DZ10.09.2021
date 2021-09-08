@@ -6,11 +6,19 @@ import Task.enums.ActionType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ActionService {
     private final int seasonDiscount;
+    private final LocalDate from;
+    private final LocalDate to;
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private List<Product> productList;
     private List<Product> actionThree = new ArrayList<>();
     private List<Product> actionSecond = new ArrayList<>();
@@ -25,7 +33,9 @@ public class ActionService {
     private int thirdProdOnOffer = 0;
     private boolean secondProdOnOffer = false;
 
-    public ActionService(List<Product> productList, int seasonDiscount) {
+    public ActionService(List<Product> productList, int seasonDiscount, String from, String to) {
+        this.from = LocalDate.parse(from, dtf);
+        this.to = LocalDate.parse(to, dtf);
         this.productList = productList;
         this.seasonDiscount = seasonDiscount;
     }
@@ -41,7 +51,13 @@ public class ActionService {
         thSeason.start();
         thFinal = new Thread(() -> union());
         thFinal.start();
-        return productListWithAction;
+        try {
+            thFinal.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            return productListWithAction;
+        }
     }
 
     private void sortByAction() {
@@ -60,10 +76,10 @@ public class ActionService {
     private void actionEveryThree() {
         if (actionThree == null)
             return;
-        for (int i = 2; i < actionThree.size(); ) {
-            this.actionThree.get(i).setPrice(BigDecimal.valueOf(1, 2));
-            i += 3;
-        }
+            for (int i = 2; i < actionThree.size(); ) {
+                this.actionThree.get(i).setPrice(BigDecimal.valueOf(1, 2));
+                i += 3;
+            }
     }
 
     private void actionForSecondProduct() {
@@ -106,6 +122,7 @@ public class ActionService {
         if (actionSeason == null)
             return;
         int disc = 100 - discount;
+        if (LocalDate.now().isAfter(from) && LocalDate.now().isBefore(to))
         for (Product list : actionSeason)
             list.setPrice(list.getPrice()
                     .multiply(new BigDecimal(BigInteger.valueOf(disc), 2), new MathContext(2)));
@@ -144,5 +161,4 @@ public class ActionService {
             return productListWithAction;
         }
     }
-
 }
