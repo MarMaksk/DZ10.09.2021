@@ -1,9 +1,11 @@
-import Service.ChequeService;
-import enums.ActionType;
-import enums.UnitType;
-import exception.BarcodeException;
-import exception.NameProductException;
-import exception.PriceProductException;
+package Task;
+
+import Task.Service.ChequeService;
+import Task.enums.ActionType;
+import Task.enums.UnitType;
+import Task.exception.BarcodeException;
+import Task.exception.NameProductException;
+import Task.exception.PriceProductException;
 
 public class Main {
     public static void main(String[] args) throws NameProductException, PriceProductException, BarcodeException, InterruptedException {

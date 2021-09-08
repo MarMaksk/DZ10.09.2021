@@ -1,8 +1,10 @@
-import enums.ActionType;
-import enums.UnitType;
-import exception.BarcodeException;
-import exception.NameProductException;
-import exception.PriceProductException;
+package Task;
+
+import Task.enums.ActionType;
+import Task.enums.UnitType;
+import Task.exception.BarcodeException;
+import Task.exception.NameProductException;
+import Task.exception.PriceProductException;
 
 import java.math.BigDecimal;
 

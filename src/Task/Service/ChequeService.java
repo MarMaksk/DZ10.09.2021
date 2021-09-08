@@ -1,4 +1,6 @@
-package Service;
+package Task.Service;
+
+import Task.Product;
 
 import java.util.List;
 

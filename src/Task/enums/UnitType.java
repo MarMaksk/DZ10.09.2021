@@ -1,4 +1,4 @@
-package enums;
+package Task.enums;
 
 public enum UnitType {
     thing("штук"),

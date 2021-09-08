@@ -1,11 +1,13 @@
-package Service;
+package Task.Service;
 
-import enums.ActionType;
+import Task.Product;
+import Task.enums.ActionType;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActionService {
     private final int seasonDiscount;

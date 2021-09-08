@@ -1,4 +1,4 @@
-package exception;
+package Task.exception;
 
 public class PriceProductException extends Exception{
     public PriceProductException() {
