@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MiniBD {
-    public static void products() throws BarcodeException, PriceProductException, NameProductException {
+    public static List<Product> products() throws BarcodeException, PriceProductException, NameProductException {
         List<Product> baseProd = new ArrayList(Arrays.asList(
                 new Product("Chees", 10, 50, UnitType.kilo, "1000000000001", ActionType.NO_ACTION),
                 new Product("Milk", 2, 50, UnitType.liter, "1000000000002", ActionType.FOR_SECOND_PRODUCT),
@@ -22,7 +22,10 @@ public class MiniBD {
                 new Product("Icecream", 1, 20, UnitType.kilo, "1000000000009", ActionType.FOR_SECOND_PRODUCT),
                 new Product("Sticker", 5, 0, UnitType.thing, "1000000000010", ActionType.FOR_SECOND_PRODUCT),
                 new Product("Stick", 5, 5, UnitType.thing, "1000000000011", ActionType.EVERY_THREE),
-                new Product("Chiller", 150, 0, UnitType.thing, "1000000000012", ActionType.EVERY_THREE)
+                new Product("Chiller", 150, 0, UnitType.thing, "1000000000012", ActionType.EVERY_THREE),
+                new Product("Wattsan fl tt", 300, 1, UnitType.thing, "1000000000013", ActionType.SEASON_SALE),
+                new Product("Dirol", 1, 1, UnitType.gram, "1000000000014", ActionType.SEASON_SALE)
         ));
+        return baseProd;
     }
 }
