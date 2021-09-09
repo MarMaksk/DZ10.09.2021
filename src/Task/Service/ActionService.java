@@ -18,7 +18,7 @@ public class ActionService {
     private final int seasonDiscount;
     private final LocalDate from;
     private final LocalDate to;
-    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private List<Product> productList;
     private List<Product> actionThree = new ArrayList<>();
     private List<Product> actionSecond = new ArrayList<>();
@@ -76,10 +76,10 @@ public class ActionService {
     private void actionEveryThree() {
         if (actionThree == null)
             return;
-            for (int i = 2; i < actionThree.size(); ) {
-                this.actionThree.get(i).setPrice(BigDecimal.valueOf(1, 2));
-                i += 3;
-            }
+        for (int i = 2; i < actionThree.size(); ) {
+            this.actionThree.get(i).setPrice(BigDecimal.valueOf(1, 2));
+            i += 3;
+        }
     }
 
     private void actionForSecondProduct() {
@@ -123,9 +123,12 @@ public class ActionService {
             return;
         int disc = 100 - discount;
         if (LocalDate.now().isAfter(from) && LocalDate.now().isBefore(to))
-        for (Product list : actionSeason)
-            list.setPrice(list.getPrice()
-                    .multiply(new BigDecimal(BigInteger.valueOf(disc), 2), new MathContext(2)));
+            for (Product list : actionSeason) {
+                double price = list.getPrice().multiply(new BigDecimal(BigInteger.valueOf(disc), 2)
+                        , new MathContext(4)).doubleValue();
+                int x = (int) ((price - Math.floor(price)) * 10);
+                list.setPrice(BigDecimal.valueOf((long) price).add(BigDecimal.valueOf(x, 2)));
+            }
     }
 
     private List<Product> union() {
@@ -160,5 +163,15 @@ public class ActionService {
         } finally {
             return productListWithAction;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

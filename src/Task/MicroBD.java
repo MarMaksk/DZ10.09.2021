@@ -38,11 +38,21 @@ public class MicroBD {
                         ActionType.EVERY_THREE),
                 new Product("Chiller", 150, 0, UnitType.thing, "1000000000012",
                         ActionType.EVERY_THREE),
-                new Product("Wattsan fl tt", 300, 1, UnitType.thing, "1000000000013",
+                new Product("Wattsan fl tt", 300, 0, UnitType.thing, "1000000000013",
                         ActionType.SEASON_SALE),
                 new Product("Dirol", 1, 1, UnitType.gram, "1000000000014",
                         ActionType.SEASON_SALE)
         ));
         return baseProd;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

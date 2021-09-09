@@ -16,6 +16,7 @@ public class ChequeService {
         double sum = 0;
         for (Product list : chequeList) {
             sum += list.getPrice().doubleValue();
+            System.out.println(list.getName() + " " + list.getPrice());
         }
         return sum;
     }
