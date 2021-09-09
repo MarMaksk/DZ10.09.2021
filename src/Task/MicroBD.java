@@ -45,10 +45,4 @@ public class MicroBD {
         ));
         return baseProd;
     }
-
-    public static Product searchBarcode(String barcode)
-            throws BarcodeException, PriceProductException, NameProductException {
-        Optional<Product> prod = products().stream().filter(el -> el.getBarcode().equals(barcode)).findFirst();
-        return prod.get();
-    }
 }

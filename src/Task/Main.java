@@ -2,6 +2,7 @@ package Task;
 
 import Task.PreparationService.PreparationForCheque;
 import Task.Service.ActionService;
+import Task.Service.BarcodeService;
 import Task.Service.ChequeService;
 import Task.enums.ActionType;
 import Task.enums.UnitType;
@@ -22,7 +23,7 @@ public class Main {
         ChequeService cheque = new ChequeService(new ActionService(MicroBD.products(),
                 40, "07-09-2021", "09-09-2021").applicationOfShares());
         double pay = cheque.payment();
-        Product prod2 = new MicroBD().searchBarcode("1000000000001");
+        Product prod2 = new BarcodeService().searchBarcode("1000000000001");
         List<Product> pfc = new PreparationForCheque().generateCheque(prod, prod1, prod2);
         System.out.println(pay);
     }
