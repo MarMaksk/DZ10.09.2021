@@ -7,6 +7,7 @@ import Task.enums.UnitType;
 import Task.exception.BarcodeException;
 import Task.exception.NameProductException;
 import Task.exception.PriceProductException;
+import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -23,10 +24,16 @@ class PreparationForChequeTest {
     PreparationForChequeTest() throws BarcodeException, PriceProductException, NameProductException {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void generateCheque() {
         List<Product> productList = new ArrayList<>(Arrays.asList(prod));
         List<Product> pf = new PreparationForCheque().generateCheque(prod);
+        assertTrue(productList.equals(pf));
+    }
+    @Test
+    void generateChequeNull() {
+        List<Product> productList = new ArrayList<>();
+        List<Product> pf = new PreparationForCheque().generateCheque(null);
         assertTrue(productList.equals(pf));
     }
 }
