@@ -9,9 +9,9 @@ import Task.exception.PriceProductException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class MicroBD {
+    //Для этого класса нет тестов т.к. это лишь имитация БД
     public static List<Product> products() throws BarcodeException, PriceProductException, NameProductException {
         List<Product> baseProd = new ArrayList(Arrays.asList(
                 new Product("Chees", 10, 50, UnitType.kilo, "1000000000001",

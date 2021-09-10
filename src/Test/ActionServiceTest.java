@@ -60,7 +60,7 @@ class ActionServiceTest {
     }
 
     @Test
-    void applicationOfSharesSecond() throws BarcodeException, PriceProductException, NameProductException {
+    void applicationOfSharesPrice() throws BarcodeException, PriceProductException, NameProductException {
         List<Product> list = new ActionService(MicroBD.products(), 40, "08.09.2021", "30.09.2021")
                 .applicationOfShares();
         for (Product ls : list) {
@@ -72,7 +72,7 @@ class ActionServiceTest {
     }
 
     @Test
-    void applicationOfSharesThree() {
+    void applicationOfSharesEmptyList() {
         List<Product> list = new ActionService(new ArrayList<>(), 40, "08.09.2021", "30.09.2021")
                 .applicationOfShares();
         List<Product> prod = new ArrayList<>();
@@ -80,7 +80,7 @@ class ActionServiceTest {
     }
 
     @Test
-    void applicationOfSharesThreeFourth() {
+    void applicationOfSharesNull() {
         List<Product> list = new ActionService(null, 40, "08.09.2021", "30.09.2021")
                 .applicationOfShares();
         List<Product> prod = new ArrayList<>();
