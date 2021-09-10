@@ -15,6 +15,9 @@ public class Product {
     private String barcode;
     private ActionType actionType;
 
+    public Product() {
+    }
+
     public Product(String name, long grivni, int peny, UnitType unitType, String barcode, ActionType actionType)
             throws NameProductException, PriceProductException, BarcodeException {
         if (name.length() < 3 || name.length() > 250)

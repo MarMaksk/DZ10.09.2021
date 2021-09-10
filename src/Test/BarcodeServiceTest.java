@@ -19,4 +19,15 @@ class BarcodeServiceTest {
                 ActionType.SEASON_SALE);
         assertEquals(product.getBarcode(), new BarcodeService().searchBarcode("1000000000014").getBarcode());
     }
+
+    @Test
+    void searchBarcodeSecond() throws BarcodeException, PriceProductException, NameProductException {
+        Product product = new Product();
+        assertEquals(product.getBarcode(), new BarcodeService().searchBarcode(null).getBarcode());
+    }
+    @Test
+    void searchBarcodeThree() throws BarcodeException, PriceProductException, NameProductException {
+        Product product = new Product();
+        assertEquals(product.getBarcode(), new BarcodeService().searchBarcode("213FFF").getBarcode());
+    }
 }
