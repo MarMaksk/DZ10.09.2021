@@ -14,6 +14,7 @@ public class ChequeService {
 
     public double payment() {
         double sum = 0;
+        if (chequeList != null)
         for (Product list : chequeList) {
             sum += list.getPrice().doubleValue();
         }
