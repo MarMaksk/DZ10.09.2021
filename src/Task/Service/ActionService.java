@@ -61,16 +61,17 @@ public class ActionService {
     }
 
     private void sortByAction() {
-        for (Product list : productList) {
-            if (list.getActionType() == ActionType.NO_ACTION)
-                actionNone.add(list);
-            else if (list.getActionType() == ActionType.EVERY_THREE)
-                actionThree.add(list);
-            else if (list.getActionType() == ActionType.FOR_SECOND_PRODUCT)
-                actionSecond.add(list);
-            else if (list.getActionType() == ActionType.SEASON_SALE)
-                actionSeason.add(list);
-        }
+        if (productList != null)
+            for (Product list : productList) {
+                if (list.getActionType() == ActionType.NO_ACTION)
+                    actionNone.add(list);
+                else if (list.getActionType() == ActionType.EVERY_THREE)
+                    actionThree.add(list);
+                else if (list.getActionType() == ActionType.FOR_SECOND_PRODUCT)
+                    actionSecond.add(list);
+                else if (list.getActionType() == ActionType.SEASON_SALE)
+                    actionSeason.add(list);
+            }
     }
 
     private void actionEveryThree() {

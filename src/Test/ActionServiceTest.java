@@ -70,4 +70,20 @@ class ActionServiceTest {
         }
 
     }
+
+    @Test
+    void applicationOfSharesThree() {
+        List<Product> list = new ActionService(new ArrayList<>(), 40, "08.09.2021", "30.09.2021")
+                .applicationOfShares();
+        List<Product> prod = new ArrayList<>();
+        assertEquals(prod, list);
+    }
+
+    @Test
+    void applicationOfSharesThreeFourth() {
+        List<Product> list = new ActionService(null, 40, "08.09.2021", "30.09.2021")
+                .applicationOfShares();
+        List<Product> prod = new ArrayList<>();
+        assertEquals(prod, list);
+    }
 }
