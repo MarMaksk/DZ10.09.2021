@@ -1,6 +1,7 @@
 package Task.enums;
 
 public enum UnitType {
+    NOT_CHOSEN("не выбрано"),
     thing("штук"),
     kilo("килограмм"),
     gram("грамм"),
