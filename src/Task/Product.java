@@ -20,6 +20,7 @@ public class Product {
 
     public Product(String name, long grivni, int peny, UnitType unitType, String barcode, ActionType actionType)
             throws NameProductException, PriceProductException, BarcodeException {
+        // Можно ли как-то избежать проверок на null? Правильно ли их вообще постоянно проводить?
         if (name == null || name.length() < 3 || name.length() > 250)
             throw new NameProductException();
         this.name = name;
