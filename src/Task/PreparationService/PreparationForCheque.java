@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PreparationForCheque {
+public class PreparationForCheque implements PreparationForChequeInter {
 
     public List<Product> generateCheque(Product... products) {
         List<Product> chequeList = new ArrayList<>();

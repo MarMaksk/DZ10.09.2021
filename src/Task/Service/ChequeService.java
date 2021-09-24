@@ -4,7 +4,7 @@ import Task.Product;
 
 import java.util.List;
 
-public class ChequeService {
+public class ChequeService implements ChequeServiceInter {
 
     private List<Product> chequeList;
 

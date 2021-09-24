@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ActionService {
+public class ActionService implements ActionServiceInter {
     private final int seasonDiscount;
     private final LocalDate from;
     private final LocalDate to;
